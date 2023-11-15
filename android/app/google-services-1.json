@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "834683075362",
+    "project_id": "kfueitroutemate",
+    "storage_bucket": "kfueitroutemate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834683075362:android:b338f4152c187f11dd037b",
+        "android_client_info": {
+          "package_name": "com.kfueitroutemate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1WNC9uBFb8uCqgz8DgYfl3dwpozEg-7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
