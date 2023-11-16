@@ -13,6 +13,15 @@ import RYKTracking from '../Screens/RYK-Tracking/Inex';
 import KhanPurTracking from '../Screens/KPR-Tracking/Index';
 import SadiqabadTracking from '../Screens/SDQ-Tracking/Index';
 import ZahirPeerTracking from '../Screens/ZP-Tracking/Index';
+import Home4Driver from '../Screens/Home4Driver/Index';
+import ChooseCities from '../Screens/DriverCities/Index';
+import UpdateTrackingRYK from '../Screens/Update-Tracking-RYK/Index';
+import UpdateTrackingKPR from '../Screens/Update-Tracking-KPR/Index';
+import UpdateTrackingSDQ from '../Screens/Update-Tracking-SDQ/Index';
+import UpdateTrackingZP from '../Screens/Update-Tracking-ZP/Index';
+import Details from '../Screens/Details';
+import SdkDetails from '../Screens/SdkDetails';
+import StudentSdkDetails from '../Screens/StudentSdkDetails';
 
 const myStack = createNativeStackNavigator();
 const Navigation = () => {
@@ -33,6 +42,19 @@ const Navigation = () => {
             <myStack.Screen options={{ headerShown: false }} name='KhanPurTracking' component={KhanPurTracking} />
             <myStack.Screen options={{ headerShown: false }} name='SadiqabadTracking' component={SadiqabadTracking} />
             <myStack.Screen options={{ headerShown: false }} name='ZahirPeerTracking' component={ZahirPeerTracking} />
+            <myStack.Screen options={{ headerShown: false }} name='Home4Driver' component={Home4Driver} />
+            <myStack.Screen options={{ headerShown: false }} name='ChooseCities' component={ChooseCities} />
+            <myStack.Screen options={{ headerShown: false }} name='UpdateTrackingRYK' component={UpdateTrackingRYK} />
+            <myStack.Screen options={{ headerShown: false }} name='UpdateTrackingKPR' component={UpdateTrackingKPR} />
+            <myStack.Screen options={{ headerShown: false }} name='UpdateTrackingSDQ' component={UpdateTrackingSDQ} />
+            <myStack.Screen options={{ headerShown: false }} name='UpdateTrackingZP' component={UpdateTrackingZP} />
+            <myStack.Screen options={{ headerShown: false }} name='Details' component={Details} />
+            <myStack.Screen options={{ headerShown: false }} name='SdkDetails' component={SdkDetails} />
+            <myStack.Screen options={{ headerShown: false }} name='StudentSdkDetails' component={StudentSdkDetails} />
+
+
+
+
             </myStack.Navigator>
         </NavigationContainer>
     )

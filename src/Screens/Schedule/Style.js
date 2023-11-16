@@ -20,8 +20,8 @@ export const Style = StyleSheet.create({
     fontFamily:Fonts.GillroySemiBold,
   },
   Back:{
-    height:25,
-    width:25,
+    height:35,
+    width:35,
   },
   cityContainer: {
     margin: 20,

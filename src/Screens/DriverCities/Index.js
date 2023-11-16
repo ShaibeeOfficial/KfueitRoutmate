@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
-import { Style } from '../Tracking/Style'; // Import your styles from Style.js
+import { Style } from '../DriverCities/Style'; // Import your styles from Style.js
 import { useNavigation } from '@react-navigation/native';
 
-const Tracking = () => {
+const ChooseCities = () => {
   const navigation = useNavigation();
   const citiesData = [
-    { id: '1', name: 'RYK', imageSource: require('../../Assets/Images/CitiesPics/RahimYarKhan.jpg') },
-    { id: '2', name: 'KhanPur', imageSource: require('../../Assets/Images/CitiesPics/Khanpur.jpg') },
-    { id: '3', name: 'Sadiqabad', imageSource: require('../../Assets/Images/CitiesPics/Sadiqabad.jpg') },
-    { id: '4', name: 'ZahirPeer', imageSource: require('../../Assets/Images/CitiesPics/ZahirPeer.jpg') },
+    { id: '1', name: 'RYKRoute', imageSource: require('../../Assets/Images/CitiesPics/RahimYarKhan.jpg') },
+    { id: '2', name: 'KhanPurRoute', imageSource: require('../../Assets/Images/CitiesPics/Khanpur.jpg') },
+    { id: '3', name: 'SadiqabadRoute', imageSource: require('../../Assets/Images/CitiesPics/Sadiqabad.jpg') },
+    { id: '4', name: 'ZahirPeerRoute', imageSource: require('../../Assets/Images/CitiesPics/ZahirPeer.jpg') },
     // Add more cities data as needed
   ];
 
@@ -19,10 +19,10 @@ const Tracking = () => {
 
     // Define the screens for each city
     const cityScreens = {
-      RYK: 'RYKTracking',
-      KhanPur: 'KhanPurTracking',
-      Sadiqabad: 'SadiqabadTracking',
-      ZahirPeer: 'ZahirPeerTracking',
+      RYKRoute: 'UpdateTrackingRYK',
+      KhanPurRoute: 'UpdateTrackingKPR',
+      SadiqabadRoute: 'UpdateTrackingSDQ',
+      ZahirPeerRoute: 'UpdateTrackingZP',
     };
 
     if (cityScreens[cityName]) {
@@ -34,11 +34,11 @@ const Tracking = () => {
     <View style={Style.container}>
       {/* Header */}
       <View style={Style.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home4Students')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home4Driver')}>
           <Image source={require('../../Assets/Icons/Back.png')} style={Style.Back} />
         </TouchableOpacity>
         <View style={{ width: '30%' }} />
-        <Text style={Style.headerText}>Tracking</Text>
+        <Text style={Style.headerText}>Cities</Text>
       </View>
 
       {/* City List */}
@@ -58,4 +58,4 @@ const Tracking = () => {
   );
 };
 
-export default Tracking;
+export default ChooseCities;

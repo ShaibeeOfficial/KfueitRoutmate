@@ -15,7 +15,7 @@ const Login = () => {
     // Check if the email is not null or undefined
     if (email && email.toLowerCase().endsWith('@kfueit.edu.pk')) {
       // If yes, navigate to 'Home4Students'
-      Navigation.navigate('Home4Students');
+      Navigation.navigate('Home4Driver');
     } else {
       // If no or email is null/undefined, show a toast message
   
@@ -43,7 +43,7 @@ const Login = () => {
             secureTextEntry={true}
             onChangeText={this.handlePasswordChange}
           />
-          <TouchableOpacity onPress={handleLogin} style={Style.loginButton} >
+          <TouchableOpacity onPress={()=>Navigation.navigate('Home4Driver')} style={Style.loginButton} >
             <Text style={Style.loginButtonText}>Login</Text>
           </TouchableOpacity>
         </View>

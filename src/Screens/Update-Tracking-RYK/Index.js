@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, FlatList, Text, TouchableOpacity, Image } from 'react-native';
-import Style from '../KPR-Tracking/Style';
+import Style from '../Update-Tracking-RYK/Style';
 
-const KhanPurTracking = ({ navigation }) => {
+const UpdateTrackingRYK = ({ navigation }) => {
   const data = [
-    { id: '4', busNumber: 'Bus No 4' },
-    { id: '5', busNumber: 'Bus No 5' },
-    { id: '6', busNumber: 'Bus No 6' },
+    { id: '1', busNumber: 'Bus No 1' },
+    { id: '2', busNumber: 'Bus No 2' },
+    { id: '3', busNumber: 'Bus No 3' },
     // Add more bus items as needed
   ];
 
@@ -14,6 +14,7 @@ const KhanPurTracking = ({ navigation }) => {
     <TouchableOpacity
       style={Style.busItem}
       onPress={() => {
+        navigation.navigate('Details',{item})
         // Handle bus item press, you can navigate to another screen or perform an action
         console.log(`Bus ${item.busNumber} pressed`);
       }}
@@ -26,11 +27,11 @@ const KhanPurTracking = ({ navigation }) => {
     <View style={Style.container}>
       {/* Header with Back Button */}
       <View style={Style.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('Tracking')}>
+        <TouchableOpacity onPress={() => navigation.navigate('ChooseCities')}>
           <Image source={require('../../Assets/Icons/Back.png')} style={Style.backButton} />
         </TouchableOpacity>
         <View style={{ width: '30%' }} />
-        <Text style={Style.headerText}>KPRTracking</Text>
+        <Text style={Style.headerText}>RYK-Route</Text>
       </View>
 
       {/* Bus List */}
@@ -43,4 +44,4 @@ const KhanPurTracking = ({ navigation }) => {
   );
 };
 
-export default KhanPurTracking;
+export default UpdateTrackingRYK;

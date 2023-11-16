@@ -44,6 +44,6 @@ export const Style = StyleSheet.create({
     marginLeft: "5%", 
     color: color.Black, 
     fontFamily: Fonts.GillroySemiBold, 
-    fontSize: 18,
+    fontSize: 15,
   },
 });

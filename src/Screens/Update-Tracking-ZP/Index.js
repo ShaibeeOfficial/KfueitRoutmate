@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, FlatList, Text, TouchableOpacity, Image } from 'react-native';
-import Style from '../KPR-Tracking/Style';
+import Style from '../Update-Tracking-ZP/Style';
 
-const KhanPurTracking = ({ navigation }) => {
+const UpdateTrackingZP = ({ navigation }) => {
   const data = [
-    { id: '4', busNumber: 'Bus No 4' },
-    { id: '5', busNumber: 'Bus No 5' },
-    { id: '6', busNumber: 'Bus No 6' },
+    { id: '10', busNumber: 'Bus No 10' },
+    { id: '11', busNumber: 'Bus No 11' },
+    { id: '12', busNumber: 'Bus No 12' },
     // Add more bus items as needed
   ];
 
@@ -26,11 +26,11 @@ const KhanPurTracking = ({ navigation }) => {
     <View style={Style.container}>
       {/* Header with Back Button */}
       <View style={Style.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('Tracking')}>
+        <TouchableOpacity onPress={() => navigation.navigate('ChooseCities')}>
           <Image source={require('../../Assets/Icons/Back.png')} style={Style.backButton} />
         </TouchableOpacity>
         <View style={{ width: '30%' }} />
-        <Text style={Style.headerText}>KPRTracking</Text>
+        <Text style={Style.headerText}>ZP-Route</Text>
       </View>
 
       {/* Bus List */}
@@ -43,4 +43,4 @@ const KhanPurTracking = ({ navigation }) => {
   );
 };
 
-export default KhanPurTracking;
+export default UpdateTrackingZP;
