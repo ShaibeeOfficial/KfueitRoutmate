@@ -6,10 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 const Schedule = () => {
   const navigation = useNavigation();
   const citiesData = [
-    { id: '1', name: 'RYK', imageSource: require('../../Assets/Images/CitiesPics/RahimYarKhan.jpg') },
-    { id: '2', name: 'KhanPur', imageSource: require('../../Assets/Images/CitiesPics/Khanpur.jpg') },
-    { id: '3', name: 'Sadiqbad', imageSource: require('../../Assets/Images/CitiesPics/Sadiqabad.jpg') },
-    { id: '4', name: 'LiaqatPur', imageSource: require('../../Assets/Images/CitiesPics/LiaqatPur.jpg') },
+    { id: '1', name: 'RYKCity', imageSource: require('../../Assets/Images/CitiesPics/RahimYarKhan.jpg') },
+    { id: '2', name: 'KhanPurCity', imageSource: require('../../Assets/Images/CitiesPics/Khanpur.jpg') },
+    { id: '3', name: 'SadiqbadCity', imageSource: require('../../Assets/Images/CitiesPics/Sadiqabad.jpg') },
+    { id: '4', name: 'ZahirPeerCity', imageSource: require('../../Assets/Images/CitiesPics/ZahirPeer.jpg') },
     // Add more cities data as needed
   ];
 
@@ -19,10 +19,10 @@ const Schedule = () => {
 
     // Define the screens for each city
     const cityScreens = {
-      RYK: 'RYKTime',
-      KhanPur: 'KhanPurTime',
-      Sadiqbad: 'SadiqbadTime',
-      LiaqatPur: 'LiaqatPurTime',
+      RYKCity: 'RYKTime',
+      KhanPurCity: 'KhanPurTime',
+      SadiqbadCity: 'SadiqbadTime',
+      ZahirPeerCity: 'ZahirPeerTime',
     };
 
     if (cityScreens[cityName]) {

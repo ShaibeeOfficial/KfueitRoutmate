@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const LiaqatPurTime = () => {
+const ZahirPeerTracking = () => {
   return (
     <View>
-      <Text>LiaqatPurTime</Text>
+      <Text>ZahirPeerTracking</Text>
     </View>
   )
 }
 
-export default LiaqatPurTime
+export default ZahirPeerTracking

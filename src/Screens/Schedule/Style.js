@@ -12,7 +12,7 @@ export const Style = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom:10,
+    marginBottom:40,
   },
   headerText: {
     fontSize: 24,
@@ -26,23 +26,23 @@ export const Style = StyleSheet.create({
   cityContainer: {
     margin: 20,
     marginLeft:30,
-    marginBottom:10,
+    marginBottom:50,
     height: 200, 
     width: '35%', 
     justifyContent: "center", 
     borderRadius: 10,
-    alignItems:'center'
+    alignItems:'center',
   },
   cityImage:{
     height: 200, 
     width: 150, 
-    borderRadius:20
+    borderRadius:20,
+    marginBottom:10,
   },
   cityText:{
     marginLeft: "5%", 
     color: color.Black, 
-    fontSize: 18, 
     fontFamily: Fonts.GillroySemiBold, 
-    fontSize: 20,
+    fontSize: 18,
   },
 });

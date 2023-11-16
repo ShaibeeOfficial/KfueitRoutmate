@@ -1,13 +1,28 @@
 // LoginScreen.js
-import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image,ToastAndroid } from 'react-native';
 import { color } from '../../Theme/Color';
 import { Style } from './Style';
 import { useNavigation } from '@react-navigation/native';
-
+import { showMessage } from 'react-native-flash-message'; 
 
 const Login = () => {
   const Navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    // Check if the email is not null or undefined
+    if (email && email.toLowerCase().endsWith('@kfueit.edu.pk')) {
+      // If yes, navigate to 'Home4Students'
+      Navigation.navigate('Home4Students');
+    } else {
+      // If no or email is null/undefined, show a toast message
+  
+      ToastAndroid.show('Only KFUEIT students can login here',ToastAndroid.SHORT)
+    }
+  };
+
   
     return (
       <View style={Style.container}>
@@ -19,7 +34,7 @@ const Login = () => {
             style={Style.input}
             placeholder="Email"
             placeholderTextColor='black'
-            onChangeText={this.handleUsernameChange}
+            onChangeText={(text)=>setEmail(text)}
           />
           <TextInput
             style={Style.input}
@@ -28,7 +43,7 @@ const Login = () => {
             secureTextEntry={true}
             onChangeText={this.handlePasswordChange}
           />
-          <TouchableOpacity style={Style.loginButton} onPress={() => Navigation.navigate('Home4Students')}>
+          <TouchableOpacity onPress={handleLogin} style={Style.loginButton} >
             <Text style={Style.loginButtonText}>Login</Text>
           </TouchableOpacity>
         </View>
