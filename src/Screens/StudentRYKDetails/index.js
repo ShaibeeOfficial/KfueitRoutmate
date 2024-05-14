@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, PermissionsAndroid, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, PermissionsAndroid, TouchableOpacity, ActivityIndicator } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import { initializeApp } from '@react-native-firebase/app';
 import database from '@react-native-firebase/database';
+import { useNavigation } from '@react-navigation/native';
+import { color } from '../../Theme/Color';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA1WNC9uBFb8uCqgz8DgYfl3dwpozEg-7Q",
@@ -14,15 +16,16 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-const MapScreen = ({ route }) => {
+const StudentRYKDetails = ({ route }) => {
+  const navigation = useNavigation();
   const { item } = route.params;
   const [lat, setLat] = useState(null);
   const [long, setLong] = useState(null);
   const [region, setRegion] = useState({
     latitude: 0,
     longitude: 0,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitudeDelta: 0.00922,
+    longitudeDelta: 0.00421,
   });
 
   useEffect(() => {
@@ -69,48 +72,53 @@ const MapScreen = ({ route }) => {
     return () => Geolocation.clearWatch();
   }, []); // Empty dependency array to run this effect only once when the component mounts
 
-  useEffect(() => {
-    console.log(region, '------');
-    setLat(region.latitude);
-    setLong(region.longitude);
-  }, [region]);
 
-  const saveLocation = () => {
-    // Save data to Firebase
+
+
+  const getLocationFromFirebase = () => {
+    // Retrieve data from Firebase based on busNumber
     database()
-    .ref(`busLocations/Ryk/${item.busNumber}`)
-      .set({
-        latitude: lat,
-        longitude: long,
-      })
-      .then(() => {
-        console.log('Data saved to Firebase');
+      .ref(`busLocations/RYK/${item.busNumber}`)
+      .once('value')
+      .then(snapshot => {
+        const locationData = snapshot.val();
+        if (locationData) {
+          console.log('Location data retrieved:', locationData);
+          setLat(locationData?.latitude)
+          setLong(locationData?.longitude)
+          // Do something with the retrieved location data
+        } else {
+          console.log('No location data found for busNumber:', item.busNumber);
+        }
       })
       .catch(error => {
-        console.log('Error saving data to Firebase: ', error);
+        console.log('Error retrieving data from Firebase:', error);
       });
   };
 
+  useEffect(() => (
+    getLocationFromFirebase()
+  ))
   return (
     <View style={styles.container}>
-      <Text>{item.busNumber}</Text>
-      <MapView style={styles.map} region={region}>
-        <Marker coordinate={region} title="You are here" />
-      </MapView>
-      <TouchableOpacity
-        style={{
-          backgroundColor: 'green',
-          height: 50,
-          width: '90%',
-          alignSelf: 'center',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop: '10%',
-        }}
-        onPress={saveLocation}
-      >
-        <Text>Save current Location</Text>
-      </TouchableOpacity>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate('UpdateTrackingZP')}>
+          <Image source={require('../../Assets/Icons/Back.png')} style={styles.backButton} />
+        </TouchableOpacity>
+        <View style={{ width: '30%' }} />
+        <Text style={styles.headerText}>{item.busNumber}</Text>
+      </View>
+      {/* <Text>{item.busNumber}</Text> */}
+      {
+        lat && long ? (
+          <MapView showsUserLocation style={styles.map} region={{ latitude: lat, longitude: long, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}>
+            <Marker coordinate={{ latitude: lat, longitude: long }} title="You are here" />
+          </MapView>
+        ) : (
+          <ActivityIndicator color={'red'} />
+        )
+      }
+
       <Text>{lat}</Text>
       <Text>{long}</Text>
     </View>
@@ -123,8 +131,26 @@ const styles = StyleSheet.create({
   },
   map: {
     height: 500,
-    marginTop: 40,
+    marginBottom: 20,
+    // marginTop: 40,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: 10,
+    backgroundColor: color.Primary,
+    // marginBottom:10,
+  },
+  backButton: {
+    width: 35,
+    height: 35,
+  },
+  headerText: {
+    fontSize: 20,
+    color: color.White,
   },
 });
 
-export default MapScreen;
+export default StudentRYKDetails;
+

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image,Text, StyleSheet, PermissionsAndroid, TouchableOpacity,ActivityIndicator } from 'react-native';
+import { View, Text, Image, StyleSheet, PermissionsAndroid, TouchableOpacity, ActivityIndicator } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import { initializeApp } from '@react-native-firebase/app';
@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-const StudentSdkDetails = ({ route }) => {
+const StudentZPDetails = ({ route }) => {
   const { item } = route.params;
   const [lat, setLat] = useState(null);
   const [long, setLong] = useState(null);
@@ -71,19 +71,19 @@ const StudentSdkDetails = ({ route }) => {
   }, []); // Empty dependency array to run this effect only once when the component mounts
 
 
- 
+
 
   const getLocationFromFirebase = () => {
     // Retrieve data from Firebase based on busNumber
     database()
-      .ref(`busLocations/Sdk/${item.busNumber}`)
+      .ref(`busLocations/ZP/${item.busNumber}`)
       .once('value')
       .then(snapshot => {
         const locationData = snapshot.val();
         if (locationData) {
           console.log('Location data retrieved:', locationData);
-setLat(locationData?.latitude)
-setLong(locationData?.longitude)
+          setLat(locationData?.latitude)
+          setLong(locationData?.longitude)
           // Do something with the retrieved location data
         } else {
           console.log('No location data found for busNumber:', item.busNumber);
@@ -94,7 +94,7 @@ setLong(locationData?.longitude)
       });
   };
 
-  useEffect(()=>(
+  useEffect(() => (
     getLocationFromFirebase()
   ))
   return (
@@ -107,16 +107,16 @@ setLong(locationData?.longitude)
         <Text style={styles.headerText}>{item.busNumber}</Text>
       </View>
       {/* <Text>{item.busNumber}</Text> */}
-     {
-      lat && long ?(
-        <MapView showsUserLocation style={styles.map} region={{ latitude: lat, longitude: long, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}>
-        <Marker coordinate={{ latitude: lat, longitude: long }} title="You are here" />
-      </MapView>
-      ):(
-        <ActivityIndicator color={'red'}/>
-      )
-     }
-   
+      {
+        lat && long ? (
+          <MapView showsUserLocation style={styles.map} region={{ latitude: lat, longitude: long, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}>
+            <Marker coordinate={{ latitude: lat, longitude: long }} title="You are here" />
+          </MapView>
+        ) : (
+          <ActivityIndicator color={'red'} />
+        )
+      }
+
       <Text>{lat}</Text>
       <Text>{long}</Text>
     </View>
@@ -149,5 +149,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudentSdkDetails;
+export default StudentZPDetails;
 

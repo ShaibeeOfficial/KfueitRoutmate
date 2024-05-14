@@ -1,10 +1,21 @@
 import messaging from '@react-native-firebase/messaging';
 import PushNotification from 'react-native-push-notification';
+import firestore from '@react-native-firebase/firestore';
+
 
 // Request permissions (iOS only)
 messaging().requestPermission();
 const channelId = 'adhd-channel-id'; // Replace with your desired channel ID
-
+export const fetchTokensFromFirestore = async () => {
+    try {
+      const tokensSnapshot = await firestore().collection('users').get();
+      const tokens = tokensSnapshot.docs.map((doc) => doc.data().fcmToken);
+      return tokens;
+    } catch (error) {
+      console.error('Error fetching tokens from Firestore:', error);
+      return [];
+    }
+  };
 
 // Listen for incoming messages
 messaging().onMessage(async remoteMessage => {

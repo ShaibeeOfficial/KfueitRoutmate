@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image,Text, StyleSheet, PermissionsAndroid, TouchableOpacity,ActivityIndicator } from 'react-native';
+import { View, Text, Image,StyleSheet, PermissionsAndroid, TouchableOpacity,ActivityIndicator } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import { initializeApp } from '@react-native-firebase/app';
 import database from '@react-native-firebase/database';
+import { useNavigation } from '@react-navigation/native';
 import { color } from '../../Theme/Color';
 
 const firebaseConfig = {
@@ -15,7 +16,8 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-const StudentSdkDetails = ({ route }) => {
+const StudentKPRDetails = ({ route }) => {
+  const navigation = useNavigation();
   const { item } = route.params;
   const [lat, setLat] = useState(null);
   const [long, setLong] = useState(null);
@@ -76,7 +78,7 @@ const StudentSdkDetails = ({ route }) => {
   const getLocationFromFirebase = () => {
     // Retrieve data from Firebase based on busNumber
     database()
-      .ref(`busLocations/Sdk/${item.busNumber}`)
+      .ref(`busLocations/KPR/${item.busNumber}`)
       .once('value')
       .then(snapshot => {
         const locationData = snapshot.val();
@@ -100,13 +102,12 @@ setLong(locationData?.longitude)
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('UpdateTrackingZP')}>
-          <Image source={require('../../Assets/Icons/Back.png')} style={styles.backButton} />
-        </TouchableOpacity>
-        <View style={{ width: '30%' }} />
-        <Text style={styles.headerText}>{item.busNumber}</Text>
-      </View>
-      {/* <Text>{item.busNumber}</Text> */}
+    <TouchableOpacity onPress={() => navigation.navigate('KhanPurTracking')}>
+      <Image source={require('../../Assets/Icons/Back.png')} style={styles.backButton} />
+    </TouchableOpacity>
+    <View style={{ width: '30%' }} />
+    <Text style={styles.headerText}>{item.busNumber}</Text>
+  </View>
      {
       lat && long ?(
         <MapView showsUserLocation style={styles.map} region={{ latitude: lat, longitude: long, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}>
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
   },
   map: {
     height: 500,
-    marginBottom: 20,
+    marginBottom:20
   },
   header: {
     flexDirection: 'row',
@@ -149,5 +150,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudentSdkDetails;
+export default StudentKPRDetails;
 

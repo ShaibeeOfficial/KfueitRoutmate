@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, PermissionsAndroid, TouchableOpacity } from 'react-native';
+import { View, Text, Image,StyleSheet, PermissionsAndroid, TouchableOpacity } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import { initializeApp } from '@react-native-firebase/app';
 import database from '@react-native-firebase/database';
 import PushNotification from 'react-native-push-notification';
+import { color } from '../../Theme/Color';
+import Fonts from '../../Theme/Fonts';
+import { useNavigation } from '@react-navigation/native';
 const firebaseConfig = {
   apiKey: "AIzaSyA1WNC9uBFb8uCqgz8DgYfl3dwpozEg-7Q",
   projectId: "kfueitroutemate",
@@ -15,14 +18,15 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 const SdkDetails = ({ route }) => {
+  const navigation = useNavigation();
   const { item } = route.params;
   const [lat, setLat] = useState(null);
   const [long, setLong] = useState(null);
   const [region, setRegion] = useState({
     latitude: 0,
     longitude: 0,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitudeDelta: 0.00922,
+    longitudeDelta: 0.00421,
   });
 
   useEffect(() => {
@@ -110,46 +114,56 @@ const SdkDetails = ({ route }) => {
 
   const showNotification = () => {
     PushNotification.localNotification({
-      title: 'Kfueit Bus Notification',
-      message: 'Bus is Leaving in 15 minutes Hurry up',
+      title: 'KFUEIT RouteMate',
+      message: 'Your Sadiqabad Bus is Leaving in 15 minutes!!Hurry up',
     });
   };
   return (
     <View style={styles.container}>
-      <Text>{item.busNumber}</Text>
+       <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate('UpdateTrackingSDQ')}>
+          <Image source={require('../../Assets/Icons/Back.png')} style={styles.backButton} />
+        </TouchableOpacity>
+        <View style={{ width: '30%' }} />
+        <Text style={styles.headerText}>{item.busNumber}</Text>
+      </View>
+      {/* <Text>{item.busNumber}</Text> */}
       <MapView style={styles.map} region={region}>
         <Marker coordinate={region} title="You are here" />
       </MapView>
       <TouchableOpacity
         style={{
-          backgroundColor: 'green',
+          backgroundColor: color.Primary,
           height: 50,
           width: '90%',
           alignSelf: 'center',
           alignItems: 'center',
           justifyContent: 'center',
           marginTop: '10%',
+          marginBottom:'5%',
+          borderRadius:12,
         }}
         onPress={saveLocation}
       >
-        <Text>Save current Location</Text>
+        <Text style={{fontWeight:Fonts.GillroySemiBold,color:color.White}}>Save current Location</Text>
       </TouchableOpacity>
-      <Text>{lat}</Text>
-      <Text>{long}</Text>
+      <Text style={{color:color.Black,fontSize:18}}>{lat}</Text>
+      <Text style={{color:color.Black,fontSize:18}}>{long}</Text>
 
       <TouchableOpacity
         style={{
-          backgroundColor: 'green',
+          backgroundColor: color.Primary,
           height: 50,
           width: '90%',
           alignSelf: 'center',
           alignItems: 'center',
           justifyContent: 'center',
           marginTop: '10%',
+          borderRadius:12,
         }}
         onPress={updateLocation}
       >
-        <Text>Update</Text>
+        <Text style={{fontWeight:Fonts.GillroySemiBold,color:color.White}}>Update</Text>
       </TouchableOpacity>
     </View>
   );
@@ -160,8 +174,25 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   map: {
-    height: 500,
-    marginTop: 40,
+    height: '55%',
+    // marginTop:10,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: 10,
+    backgroundColor: color.Primary,
+    // marginBottom:10,
+  },
+  backButton: {
+    width: 35,
+    height: 35,
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: color.White,
   },
 });
 

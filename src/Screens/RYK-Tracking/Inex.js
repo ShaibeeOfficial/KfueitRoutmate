@@ -14,6 +14,7 @@ const RYKTracking = ({ navigation }) => {
     <TouchableOpacity
       style={Style.busItem}
       onPress={() => {
+        navigation.navigate('StudentRYKDetails',{item})
         // Handle bus item press, you can navigate to another screen or perform an action
         console.log(`Bus ${item.busNumber} pressed`);
       }}

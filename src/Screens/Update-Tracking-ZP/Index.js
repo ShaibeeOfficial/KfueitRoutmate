@@ -4,9 +4,9 @@ import Style from '../Update-Tracking-ZP/Style';
 
 const UpdateTrackingZP = ({ navigation }) => {
   const data = [
-    { id: '10', busNumber: 'Bus No 10' },
-    { id: '11', busNumber: 'Bus No 11' },
-    { id: '12', busNumber: 'Bus No 12' },
+    { id: '10', busNumber: 'Bus No 1' },
+    { id: '11', busNumber: 'Bus No 2' },
+    { id: '12', busNumber: 'Bus No 3' },
     // Add more bus items as needed
   ];
 
@@ -14,6 +14,7 @@ const UpdateTrackingZP = ({ navigation }) => {
     <TouchableOpacity
       style={Style.busItem}
       onPress={() => {
+        navigation.navigate('ZPDetails',{item})
         // Handle bus item press, you can navigate to another screen or perform an action
         console.log(`Bus ${item.busNumber} pressed`);
       }}
